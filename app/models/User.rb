@@ -6,4 +6,6 @@ class User < ApplicationRecord
   has_many :favorites
   has_many :favorite_restaurants, through: :favorites, class_name: :restaurants
 
+  validates :username, uniqueness: { case_sensitive: true }
+
 end
