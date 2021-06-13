@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::API
   before_action :authorized
 
+  def authentication_json(user_id)
+    { token: make_token(user_id), user: User.find(user_id) }
+  end
+
   def make_token(user_id)
     payload = {user_id: user_id}
     JWT.encode(payload, hmac_secret, 'HS256')
